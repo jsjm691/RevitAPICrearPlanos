@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="Command">
+		<Text>Command TFMCrearPlanosJS</Text>
+		<Description>Una descripcion para el comando</Description>
+		<Assembly>TFMCrearPlanosJS.dll</Assembly>
+		<FullClassName>TFMCrearPlanosJS.Command</FullClassName>
+		<ClientId>67de06b7-4ba6-42f2-9ae7-761cc10fe502</ClientId>
+		<VendorId>TFM_JS</VendorId>
+		<VendorDescription>TFM_JS, joh.salas@uc.cl</VendorDescription>
+	</AddIn>
+	<AddIn Type="Application">
+		<Name>TFM_JS</Name>
+		<Assembly>TFMCrearPlanosJS.dll</Assembly>
+		<FullClassName>TFMCrearPlanosJS.App</FullClassName>
+		<ClientId>ee6ad79f-721c-4f21-b9ac-1627810eaae0</ClientId>
+		<VendorId>TFM_JS</VendorId>
+		<VendorDescription>TFM_JS, joh.salas@uc.cl</VendorDescription>
+	</AddIn>
+</RevitAddIns>
