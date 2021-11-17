@@ -60,9 +60,6 @@ namespace TFMCrearPlanosJS
                 //CONVIRTIENDO LISTA DE ELEMENTOS EN VISTAS
                 List<ViewPlan> viewPlanList = formViewList.viewListSelected;
 
-                //CANTIDAD DE VISTAS SELECCIONADAS
-                int cantidad = viewPlanList.Count;
-
 
                 //CREANDO PLANOS (TitleBlocks) E INSERTANDO VISTAS
                 FamilySymbol titleBlock = colTitleBlocks.FirstElement() as FamilySymbol;
@@ -94,7 +91,7 @@ namespace TFMCrearPlanosJS
 
                 }
 
-                    tran.Commit();
+                tran.Commit();
 
 
                 
