@@ -64,7 +64,7 @@ namespace TFMCrearPlanosJS
                 int cantidad = viewPlanList.Count;
 
 
-                //SELECCIONADO Y CREANDO PLANOS (TitleBlocks)
+                //CREANDO PLANOS (TitleBlocks) E INSERTANDO VISTAS
                 FamilySymbol titleBlock = colTitleBlocks.FirstElement() as FamilySymbol;
 
                 if (formViewList.createSheets == true)
@@ -76,10 +76,12 @@ namespace TFMCrearPlanosJS
                         {
                             throw new Exception("No se pudo crear una nueva lamina");
                         }
+
                         BoundingBoxUV uv = newSheets.Outline;
                         double xx = (uv.Max.U - uv.Min.U) / 2;
                         double yy = (uv.Max.U - uv.Min.U) / 2;
                         XYZ pnt = new XYZ(xx, yy, 0);
+
 
                         if (Viewport.CanAddViewToSheet(doc, newSheets.Id, item.Id))
                         {
@@ -88,43 +90,6 @@ namespace TFMCrearPlanosJS
 
 
                     }
-
-
-                    //for (int i = 0; i < cantidad; i++)
-                    //{
-                    //    ViewSheet newSheets = ViewSheet.Create(doc, titleBlock.Id);
-                    //    if (newSheets == null)
-                    //    {
-                    //        throw new Exception("No se pudo crear una nueva lamina");
-                    //    }
-
-
-                    //    //CREANDO UBICACION PARA INSERTAR
-                    //    BoundingBoxUV uv = newSheets.Outline;
-                    //    double xx = (uv.Max.U - uv.Min.U) / 2;
-                    //    double yy = (uv.Max.U - uv.Min.U) / 2;
-                    //    XYZ pnt = new XYZ(xx, yy, 0);
-
-
-                    //    if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList[i].Id))
-                    //    {
-                    //        Viewport.Create(doc, newSheets.Id, viewPlanList[i].Id, pnt);
-                    //    }
-
-
-
-
-
-
-
-                    //INSERTANDO VISTA EN CADA PLANO
-                    //for (int j = 0; j < cantidad; j++)
-                    //{
-                    //    if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList.Id))
-                    //    {
-                    //        Viewport.Create(doc, newSheets.Id, viewPlanList.Id, pnt);
-                    //    }
-
 
 
                 }
