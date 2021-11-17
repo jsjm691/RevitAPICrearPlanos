@@ -69,39 +69,62 @@ namespace TFMCrearPlanosJS
 
                 if (formViewList.createSheets == true)
                 {
-                    for (int i = 0; i < cantidad; i++)
+                    foreach (var item in viewPlanList)
                     {
                         ViewSheet newSheets = ViewSheet.Create(doc, titleBlock.Id);
                         if (newSheets == null)
                         {
                             throw new Exception("No se pudo crear una nueva lamina");
                         }
-
-
-                        //CREANDO UBICACION PARA INSERTAR
                         BoundingBoxUV uv = newSheets.Outline;
                         double xx = (uv.Max.U - uv.Min.U) / 2;
                         double yy = (uv.Max.U - uv.Min.U) / 2;
                         XYZ pnt = new XYZ(xx, yy, 0);
 
-
-                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList[i].Id))
+                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, item.Id))
                         {
-                            Viewport.Create(doc, newSheets.Id, viewPlanList[i].Id, pnt);
+                            Viewport.Create(doc, newSheets.Id, item.Id, pnt);
                         }
-
-                        //INSERTANDO VISTA EN CADA PLANO
-                        //for (int j = 0; j < cantidad; j++)
-                        //{
-                        //    if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList.Id))
-                        //    {
-                        //        Viewport.Create(doc, newSheets.Id, viewPlanList.Id, pnt);
-                        //    }
-                        //}
-
 
 
                     }
+
+
+                    //for (int i = 0; i < cantidad; i++)
+                    //{
+                    //    ViewSheet newSheets = ViewSheet.Create(doc, titleBlock.Id);
+                    //    if (newSheets == null)
+                    //    {
+                    //        throw new Exception("No se pudo crear una nueva lamina");
+                    //    }
+
+
+                    //    //CREANDO UBICACION PARA INSERTAR
+                    //    BoundingBoxUV uv = newSheets.Outline;
+                    //    double xx = (uv.Max.U - uv.Min.U) / 2;
+                    //    double yy = (uv.Max.U - uv.Min.U) / 2;
+                    //    XYZ pnt = new XYZ(xx, yy, 0);
+
+
+                    //    if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList[i].Id))
+                    //    {
+                    //        Viewport.Create(doc, newSheets.Id, viewPlanList[i].Id, pnt);
+                    //    }
+
+
+
+
+
+
+
+                    //INSERTANDO VISTA EN CADA PLANO
+                    //for (int j = 0; j < cantidad; j++)
+                    //{
+                    //    if (Viewport.CanAddViewToSheet(doc, newSheets.Id, viewPlanList.Id))
+                    //    {
+                    //        Viewport.Create(doc, newSheets.Id, viewPlanList.Id, pnt);
+                    //    }
+
 
 
                 }
