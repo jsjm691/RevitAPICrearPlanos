@@ -31,6 +31,7 @@ namespace TFMCrearPlanosJS
             FilteredElementCollector colTitleBlocks = new FilteredElementCollector(doc).OfClass(typeof(FamilySymbol)).OfCategory(BuiltInCategory.OST_TitleBlocks);
             FilteredElementCollector colViews = new FilteredElementCollector(doc).OfClass(typeof(View));
             FilteredElementCollector colViewPorts = new FilteredElementCollector(doc).OfClass(typeof(FamilySymbol)).OfCategory(BuiltInCategory.OST_Viewports);
+            FilteredElementCollector colSheets = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet));
             #endregion
 
             //TRANSACCION
@@ -64,9 +65,9 @@ namespace TFMCrearPlanosJS
                 //CREANDO PLANOS (TitleBlocks) E INSERTANDO VISTAS
                 FamilySymbol titleBlock = colTitleBlocks.FirstElement() as FamilySymbol;
 
-                if (formViewList.createSheets == true)
+                if (formViewList.createSheets)
                 {
-                    foreach (var item in viewPlanList)
+                    foreach (var i in viewPlanList)
                     {
                         ViewSheet newSheets = ViewSheet.Create(doc, titleBlock.Id);
                         if (newSheets == null)
@@ -76,19 +77,22 @@ namespace TFMCrearPlanosJS
 
                         BoundingBoxUV uv = newSheets.Outline;
                         double xx = (uv.Max.U - uv.Min.U) / 2;
-                        double yy = (uv.Max.U - uv.Min.U) / 2;
-                        XYZ pnt = new XYZ(xx, yy, 0);
+                        XYZ pnt = new XYZ(xx, 1, 0);
 
 
-                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, item.Id))
+                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, i.Id))
                         {
-                            Viewport.Create(doc, newSheets.Id, item.Id, pnt);
+                            Viewport.Create(doc, newSheets.Id, i.Id, pnt);
                         }
-
-
                     }
+                }
 
-
+                //AGREGAR PREFIJO A NOMBRE DE PLANOS
+                foreach (Element j in colSheets)
+                {
+                    Parameter sheetName = j.get_Parameter(BuiltInParameter.SHEET_NAME);
+                    string newName = "TFM_" + sheetName.AsString();
+                    sheetName.Set(newName);
                 }
 
                 tran.Commit();

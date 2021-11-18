@@ -42,7 +42,9 @@ namespace TFMCrearPlanosJS
                 string sheetNam = "";
                 string sheetSca = "";
 
+
                 foreach (Element i in colSheets)
+
                 {
                     sheetNum += Util.ParameterToString(i.LookupParameter("Sheet Number"));
                     sheetNam += Util.ParameterToString(i.LookupParameter("Sheet Name"));
@@ -58,6 +60,7 @@ namespace TFMCrearPlanosJS
 
                 //INICIANDO EXCEL
                 X.Application excel = new X.Application();
+                excel.Visible = true;
                 if (excel != null)
                 {
                     X.Workbook myWorkbook = excel.Workbooks.Add();      //AGREGANDO LIBRO A EXCEL
@@ -71,13 +74,10 @@ namespace TFMCrearPlanosJS
                     //GUARDANDO ARCHIVO EXCEL
                     excel.ActiveWorkbook.SaveAs(path, X.XlFileFormat.xlWorkbookNormal);
 
-                    myWorkbook.Close(); //CERRAR ARCHIVO
-                    excel.Quit();       //SALIR DE APLICACION
+                    //myWorkbook.Close(); //CERRAR ARCHIVO
+                    //excel.Quit();       //SALIR DE APLICACION
                 }
                 #endregion
-
-
-
 
 
 

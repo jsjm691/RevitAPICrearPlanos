@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using System.Reflection;
+using System.IO;
 using Autodesk.Revit.UI;
 
 
@@ -16,9 +13,11 @@ namespace TFMCrearPlanosJS
             return Result.Succeeded;
         }
 
+
         public Result OnStartup(UIControlledApplication a)
         {
-            const string tabName = "Tools Sheets";
+
+            const string tabName = "Sheets Tools";
             const string panelName = "Sheets";
 
             //CREANDO LA PESTAÑA
@@ -43,6 +42,16 @@ namespace TFMCrearPlanosJS
             var pbDataExportToExcel = new PushButtonData(NAME_D, TEXT_D, Assembly.GetExecutingAssembly().Location, COMMAND_D);
             pbDataExportToExcel.ToolTip = "Exporta datos de los planos a Excel";
 
+
+
+            //pbCommand.LargeImage = NewBitmapImage(Assembly.GetExecutingAssembly(),
+            //    "TFMCrearPlanosJs.iCommand.png");
+
+            //pbDataExportToExcel.LargeImage = NewBitmapImage(Assembly.GetExecutingAssembly(),
+            //  "TFMCrearPlanosJS.iCExportToData.png");
+
+
+
             //AGREGANDO BOTONES AL PANEL
             SplitButtonData split_buttonData
                   = new SplitButtonData(
@@ -55,5 +64,19 @@ namespace TFMCrearPlanosJS
 
             return Result.Succeeded;
         }
+
+        //BitmapImage NewBitmapImage(
+        //      System.Reflection.Assembly a,
+        //      string imageName)
+        //{
+        //    Stream s = a.GetManifestResourceStream(imageName);
+        //    BitmapImage img = new BitmapImage();
+        //    img.BeginInit();
+        //    img.StreamSource = s;
+        //    img.EndInit();
+        //    return img;
+        //}
+
+
     }
 }
