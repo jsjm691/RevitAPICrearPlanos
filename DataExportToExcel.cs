@@ -16,7 +16,7 @@ using X = Microsoft.Office.Interop.Excel;
 
 namespace TFMCrearPlanosJS
 {
-    [Transaction(TransactionMode.ReadOnly)]
+    [Transaction(TransactionMode.Manual)]
     class DataExportToExcel : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData,
@@ -29,50 +29,54 @@ namespace TFMCrearPlanosJS
             Document doc = uiDoc.Document;
             #endregion
 
-            FilteredElementCollector colViewSheets = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet));
-
+            FilteredElementCollector colSheets = new FilteredElementCollector(doc).OfClass(typeof(ViewSheet));
 
             using (Transaction tran = new Transaction(doc, "Obtener datos de Planos"))
             {
                 tran.Start();
 
 
-                #region ALMACENANDO PARAMETROS A EXPORTAR
-                List<Element> dataViewSheets = new List<Element>();
+                #region ALMACENANDO DATOS A EXPORTAR
 
-                foreach (var i in colViewSheets)
+                string sheetNum = "";
+                string sheetNam = "";
+                string sheetSca = "";
+
+                foreach (Element i in colSheets)
                 {
-                    Parameter shNum = i.get_Parameter(BuiltInParameter.SHEET_NUMBER);
-                    Parameter shNam = i.get_Parameter(BuiltInParameter.SHEET_NAME);
-                    Parameter shSca = i.get_Parameter(BuiltInParameter.SHEET_SCALE);
+                    sheetNum += Util.ParameterToString(i.LookupParameter("Sheet Number"));
+                    sheetNam += Util.ParameterToString(i.LookupParameter("Sheet Name"));
+                    sheetSca += Util.ParameterToString(i.LookupParameter("Scale"));
+                }
 
-                    dataViewSheets.Add(i);//REVISAR ESTE LINEA ( DEBO ALMACENAR COMO STRING)
+                #endregion
+
+
+                #region EXPORTACION DE DATOS A EXCEL
+                //RUTA PARA ALMACENAR EL ARCHIVO
+                string path = "C:\\Users\\Usuario\\Desktop\\Datos.xlsm";
+
+                //INICIANDO EXCEL
+                X.Application excel = new X.Application();
+                if (excel != null)
+                {
+                    X.Workbook myWorkbook = excel.Workbooks.Add();      //AGREGANDO LIBRO A EXCEL
+                    X.Worksheet myWorksheet = (excel.Worksheets.Add()); //AGREGANDO HOJA  A LIBRO DE EXCEL
+
+                    //INSERTANDO DATOS EN LAS CELDAS DE EXCEL, (PRIMER INDICE FILA, SEGUNDO COLUMNA)
+                    myWorksheet.Cells[1, 1] = sheetNum;
+                    myWorksheet.Cells[2, 1] = sheetNam;
+                    myWorksheet.Cells[3, 1] = sheetSca;
+
+                    //GUARDANDO ARCHIVO EXCEL
+                    excel.ActiveWorkbook.SaveAs(path, X.XlFileFormat.xlWorkbookNormal);
+
+                    myWorkbook.Close(); //CERRAR ARCHIVO
+                    excel.Quit();       //SALIR DE APLICACION
                 }
                 #endregion
 
 
-                X.Application excel = new X.Application();
-                excel.Visible = true;
-
-                X.Workbook workbook = excel.Workbooks.Add(
-                    Missing.Value);
-
-                X.Worksheet worksheet;
-
-               worksheet = excel.Worksheets.Add(
-                   Missing.Value, Missing.Value,
-                   Missing.Value, Missing.Value)
-                   as X.Worksheet;
-
-                int column = 3;
-
-                foreach(string j in dataViewSheets)
-                {
-                    worksheet.Cells[1, column] = dataViewSheets;
-                    ++column;
-                }
-                
-                
 
 
 
