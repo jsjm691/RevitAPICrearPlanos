@@ -10,7 +10,7 @@ namespace TFMCrearPlanosJS
         public static string ParameterToString(Parameter param)
         {
             string val = "none";
-            if (param != null)
+            if (param == null)
             {
                 return val;
             }
@@ -38,6 +38,9 @@ namespace TFMCrearPlanosJS
                     break;
 
                 case StorageType.None:
+                    break;
+
+                default:
                     break;
             }
             return val;

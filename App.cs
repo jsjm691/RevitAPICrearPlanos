@@ -2,7 +2,8 @@
 using System.Reflection;
 using System.IO;
 using Autodesk.Revit.UI;
-
+using System.Windows.Media;
+using System;
 
 namespace TFMCrearPlanosJS
 {
@@ -65,11 +66,9 @@ namespace TFMCrearPlanosJS
             return Result.Succeeded;
         }
 
-        //BitmapImage NewBitmapImage(
-        //      System.Reflection.Assembly a,
-        //      string imageName)
+        //private ImageSource NewBitmapImage(Assembly assembly, string v)
         //{
-        //    Stream s = a.GetManifestResourceStream(imageName);
+        //    Stream s = assembly.GetManifestResourceStream(v);
         //    BitmapImage img = new BitmapImage();
         //    img.BeginInit();
         //    img.StreamSource = s;

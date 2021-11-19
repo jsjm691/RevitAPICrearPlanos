@@ -42,14 +42,18 @@ namespace TFMCrearPlanosJS
                 string sheetNam = "";
                 string sheetSca = "";
 
-
                 foreach (Element i in colSheets)
-
                 {
-                    sheetNum += Util.ParameterToString(i.LookupParameter("Sheet Number"));
-                    sheetNam += Util.ParameterToString(i.LookupParameter("Sheet Name"));
-                    sheetSca += Util.ParameterToString(i.LookupParameter("Scale"));
+                    sheetNum += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NUMBER));
+                    sheetNam += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NAME));
+                    sheetSca += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_SCALE));
                 }
+
+                //{
+                //    sheetNum += i.get_Parameter(BuiltInParameter.SHEET_NUMBER);
+                //    sheetNam += i.get_Parameter(BuiltInParameter.SHEET_NAME);
+                //    sheetSca += i.get_Parameter(BuiltInParameter.SHEET_SCALE);
+                //}
 
                 #endregion
 
@@ -71,11 +75,9 @@ namespace TFMCrearPlanosJS
                     myWorksheet.Cells[2, 1] = sheetNam;
                     myWorksheet.Cells[3, 1] = sheetSca;
 
+
                     //GUARDANDO ARCHIVO EXCEL
                     excel.ActiveWorkbook.SaveAs(path, X.XlFileFormat.xlWorkbookNormal);
-
-                    //myWorkbook.Close(); //CERRAR ARCHIVO
-                    //excel.Quit();       //SALIR DE APLICACION
                 }
                 #endregion
 
