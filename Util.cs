@@ -18,23 +18,23 @@ namespace TFMCrearPlanosJS
             switch (param.StorageType)
             {
                 case StorageType.Double:
-                    double dVal = param.AsDouble();
-                    val = dVal.ToString();
+                    double dval = param.AsDouble();
+                    val = dval.ToString();
                     break;
 
                 case StorageType.Integer:
-                    double iVal = param.AsDouble();
+                    int iVal = param.AsInteger();
                     val = iVal.ToString();
                     break;
 
                 case StorageType.String:
-                    double sVal = param.AsDouble();
-                    val = sVal.ToString();
+                    string sVal = param.AsString();
+                    val = sVal;
                     break;
 
                 case StorageType.ElementId:
-                    double idVal = param.AsDouble();
-                    val = idVal.ToString();
+                    ElementId idVal = param.AsElementId();
+                    val = idVal.IntegerValue.ToString();
                     break;
 
                 case StorageType.None:
