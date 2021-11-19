@@ -49,12 +49,6 @@ namespace TFMCrearPlanosJS
                     sheetSca += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_SCALE));
                 }
 
-                //{
-                //    sheetNum += i.get_Parameter(BuiltInParameter.SHEET_NUMBER);
-                //    sheetNam += i.get_Parameter(BuiltInParameter.SHEET_NAME);
-                //    sheetSca += i.get_Parameter(BuiltInParameter.SHEET_SCALE);
-                //}
-
                 #endregion
 
 
