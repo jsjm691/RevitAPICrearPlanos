@@ -37,18 +37,18 @@ namespace TFMCrearPlanosJS
 
 
                 #region ALMACENANDO DATOS A EXPORTAR
-
-                string sheetNum = "";
-                string sheetNam = "";
-                string sheetSca = "";
+                List<string> sheetNum = new List<string>();
+                List<string> sheetNam = new List<string>();
+                List<string> sheetSca = new List<string>();
 
                 foreach (Element i in colSheets)
                 {
-                    sheetNum += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NUMBER));
-                    sheetNam += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NAME));
-                    sheetSca += Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_SCALE));
-                }
+                    string num = Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NUMBER));
+                    string nam = Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_NAME));
+                    string sca = Util.ParameterToString(i.get_Parameter(BuiltInParameter.SHEET_SCALE));
 
+                    sheetNum.Add(num); sheetNam.Add(nam); sheetSca.Add(sca);
+                }
                 #endregion
 
 
@@ -60,21 +60,39 @@ namespace TFMCrearPlanosJS
                 X.Application excel = new X.Application();
                 excel.Visible = true;
                 if (excel != null)
+
                 {
                     X.Workbook myWorkbook = excel.Workbooks.Add();      //AGREGANDO LIBRO A EXCEL
                     X.Worksheet myWorksheet = (excel.Worksheets.Add()); //AGREGANDO HOJA  A LIBRO DE EXCEL
 
-                    //INSERTANDO DATOS EN LAS CELDAS DE EXCEL, (PRIMER INDICE FILA, SEGUNDO COLUMNA)
-                    myWorksheet.Cells[1, 1] = sheetNum;
-                    myWorksheet.Cells[2, 1] = sheetNam;
-                    myWorksheet.Cells[3, 1] = sheetSca;
+                    #region INSERTANDO DATOS EN LAS CELDAS DE EXCEL, (PRIMER INDICE FILA, SEGUNDO COLUMNA)
+                    int row = 1;
 
+                    foreach (string j in sheetNum)
+                    {
+                        myWorksheet.Cells[row, 1] = j;
+                        ++row;
+                    }
+
+                    row = 1;
+                    foreach (string k in sheetNam)
+                    {
+                        myWorksheet.Cells[row, 2] = k;
+                        ++row;
+                    }
+
+                    row = 1;
+                    foreach (string l in sheetSca)
+                    {
+                        myWorksheet.Cells[row, 3] = l;
+                        ++row;
+                    }
+                    #endregion
 
                     //GUARDANDO ARCHIVO EXCEL
                     excel.ActiveWorkbook.SaveAs(path, X.XlFileFormat.xlWorkbookNormal);
                 }
                 #endregion
-
 
 
                 tran.Commit();
