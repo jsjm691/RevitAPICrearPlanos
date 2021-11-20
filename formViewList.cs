@@ -14,7 +14,7 @@ namespace TFMCrearPlanosJS
 {
     public partial class formViewList : System.Windows.Forms.Form
     {
-        //MOSTRANDO LA LISTA DE ELEMENTOS
+        //MOSTRAR LA LISTA DE ELEMENTOS
         public formViewList(IList<Element> viewList)
         {
             InitializeComponent();
@@ -24,32 +24,60 @@ namespace TFMCrearPlanosJS
 
         }
 
-
-        //ALMACENANDO LOS ELEMENTOS SELECCIONADOS
+        #region COLECCION DE ELEMENTOS SELECCIONADOS EL CHECKEDLISTBOX
+        //ALMACENAR LOS ELEMENTOS SELECCIONADOS
         public static List<Autodesk.Revit.DB.ViewPlan> viewListSelected = new List<ViewPlan>();
 
-
-        //RECORRIENDO LA LISTA PARA COMPROBAR LOS ELEMENTOS SELECCIONADOS
+        //RECORRER LA LISTA PARA COMPROBAR LOS ELEMENTOS SELECCIONADOS
         public void viewListFiltered()
         {
             foreach (Autodesk.Revit.DB.Element views in selectViewList.CheckedItems)
             {
+
                 viewListSelected.Add(views as ViewPlan);
             }
         }
+        #endregion
 
-        
-        //ALMACENANDO EL VALOR DEL BOTON
-        public static bool createSheets;
 
-        //CLICK SOBRE EL BOTON ES "TRUE"
+        #region BOTONES PARA SELECCIONAR Y DESELECCIONAR TODO
+        private void btnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < selectViewList.Items.Count; i++)
+            {
+                selectViewList.SetItemChecked(i, true);
+            }
+        }
+
+        private void btnResetSelection_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < selectViewList.Items.Count; i++)
+            {
+                selectViewList.SetItemChecked(i, false);
+            }
+        }
+        #endregion
+
+
+        #region BOTON PARA CREAR PLANOS
+        public static bool createSheets; //ALMACENA EL VALOR DEL BOTON
+
         private void btnCreateSheets_Click(object sender, EventArgs e)
         {
-            
             createSheets = true;
             viewListFiltered();
             Close();
         }
+        #endregion
+
+
+        #region BOTON PARA CANCELAR
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            createSheets = false;
+            Close();
+        }
+        #endregion
     }
 
 }

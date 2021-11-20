@@ -58,7 +58,7 @@ namespace TFMCrearPlanosJS
                 frm.ShowDialog();
 
 
-                //CONVIRTIENDO LISTA DE ELEMENTOS EN VISTAS
+                //RECIBIENDO LISTA DE VISTAS DESDE WINFORM
                 List<ViewPlan> viewPlanList = formViewList.viewListSelected;
 
 
@@ -80,7 +80,7 @@ namespace TFMCrearPlanosJS
                         XYZ pnt = new XYZ(xx, 1, 0);
 
 
-                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, i.Id))
+                        if (Viewport.CanAddViewToSheet(doc, newSheets.Id, i.Id))//REVISAR ESTA LINEA
                         {
                             Viewport.Create(doc, newSheets.Id, i.Id, pnt);
                         }
