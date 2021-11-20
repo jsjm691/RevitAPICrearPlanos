@@ -1,9 +1,11 @@
-﻿using System.Windows.Media.Imaging;
-using System.Reflection;
+﻿using System.Reflection;
 using System.IO;
-using Autodesk.Revit.UI;
-using System.Windows.Media;
 using System;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using Autodesk.Revit.UI;
+
 
 namespace TFMCrearPlanosJS
 {
@@ -18,45 +20,47 @@ namespace TFMCrearPlanosJS
         public Result OnStartup(UIControlledApplication a)
         {
 
-            const string tabName = "Sheets Tools";
+            const string tabName = "SheetsTools";
             const string panelName = "Sheets";
 
-            //CREANDO LA PESTAÑA
+            //CREANDO PESTAÑA
             a.CreateRibbonTab(tabName);
 
-            //CREANDO EL PANEL
+
+            //CREANDO PANEL
             var newPanel = a.CreateRibbonPanel(tabName, panelName);
 
-            //CREANDO EL BOTON PRINCIPAL
-            const string NAME_C = "Set Views on Sheets";
-            const string TEXT_C = "Set Views on Sheets";
-            const string COMMAND_C = "TFMCrearPlanosJS.Command";
 
-            var pbCommand = new PushButtonData(NAME_C, TEXT_C, Assembly.GetExecutingAssembly().Location, COMMAND_C);
+            //INSERTANDO ICONOS
+            BitmapImage btOne = new BitmapImage(new Uri("pack://application:,,,/TFMCrearPlanosJS;component/Resources/iCommand.png"));
+            BitmapImage btTwo = new BitmapImage(new Uri("pack://application:,,,/TFMCrearPlanosJS;component/Resources/iCExportToData.png"));
+
+
+            #region CREANDO BOTONES
+
+            const string NAME_COM = "Set Views on Sheets";
+            const string TEXT_COM = "Set Views on Sheets";
+            const string COMMAND_COM = "TFMCrearPlanosJS.Command";
+
+            var pbCommand = new PushButtonData(NAME_COM, TEXT_COM, Assembly.GetExecutingAssembly().Location, COMMAND_COM);
             pbCommand.ToolTip = "Inserta en nuevos planos las vistas seleccionadas";
+            pbCommand.LargeImage = btOne;
 
+            const string NAME_DAT = "Data to Excel";
+            const string TEXT_DAT = "Data to Excel";
+            const string COMMAND_DAT = "TFMCrearPlanosJS.DataExportToExcel";
 
-            const string NAME_D = "Data to Excel";
-            const string TEXT_D = "Data to Excel";
-            const string COMMAND_D = "TFMCrearPlanosJS.DataExportToExcel";
-
-            var pbDataExportToExcel = new PushButtonData(NAME_D, TEXT_D, Assembly.GetExecutingAssembly().Location, COMMAND_D);
+            var pbDataExportToExcel = new PushButtonData(NAME_DAT, TEXT_DAT, Assembly.GetExecutingAssembly().Location, COMMAND_DAT);
             pbDataExportToExcel.ToolTip = "Exporta datos de los planos a Excel";
+            pbDataExportToExcel.LargeImage = btTwo;
 
-
-
-            //pbCommand.LargeImage = NewBitmapImage(Assembly.GetExecutingAssembly(),
-            //    "TFMCrearPlanosJs.iCommand.png");
-
-            //pbDataExportToExcel.LargeImage = NewBitmapImage(Assembly.GetExecutingAssembly(),
-            //  "TFMCrearPlanosJS.iCExportToData.png");
-
+            #endregion
 
 
             //AGREGANDO BOTONES AL PANEL
             SplitButtonData split_buttonData
-                  = new SplitButtonData(
-                    "SetViewsonSheets", "DataExportToExcel");
+                                            = new SplitButtonData(
+                                            "SetViewsonSheets", "DataExportToExcel");
 
             SplitButton split_button = newPanel.AddItem(split_buttonData) as SplitButton;
 
@@ -65,17 +69,5 @@ namespace TFMCrearPlanosJS
 
             return Result.Succeeded;
         }
-
-        //private ImageSource NewBitmapImage(Assembly assembly, string v)
-        //{
-        //    Stream s = assembly.GetManifestResourceStream(v);
-        //    BitmapImage img = new BitmapImage();
-        //    img.BeginInit();
-        //    img.StreamSource = s;
-        //    img.EndInit();
-        //    return img;
-        //}
-
-
     }
 }
