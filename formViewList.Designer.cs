@@ -32,7 +32,7 @@
             this.selectViewList = new System.Windows.Forms.CheckedListBox();
             this.btnCreateSheets = new System.Windows.Forms.Button();
             this.btnResetSelection = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -67,17 +67,17 @@
             this.btnResetSelection.UseVisualStyleBackColor = true;
             this.btnResetSelection.Click += new System.EventHandler(this.btnResetSelection_Click);
             // 
-            // button4
+            // btnCancel
             // 
-            this.button4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button4.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(261, 244);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 33);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Cancel";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCancel.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(261, 244);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(87, 33);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSelectAll
             // 
@@ -86,7 +86,7 @@
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(87, 33);
             this.btnSelectAll.TabIndex = 7;
-            this.btnSelectAll.Text = "Check All";
+            this.btnSelectAll.Text = "Select All";
             this.btnSelectAll.UseVisualStyleBackColor = true;
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
             // 
@@ -97,7 +97,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(358, 296);
             this.Controls.Add(this.btnSelectAll);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnResetSelection);
             this.Controls.Add(this.btnCreateSheets);
             this.Controls.Add(this.selectViewList);
@@ -117,7 +117,7 @@
         private System.Windows.Forms.CheckedListBox selectViewList;
         private System.Windows.Forms.Button btnCreateSheets;
         private System.Windows.Forms.Button btnResetSelection;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSelectAll;
     }
 }
